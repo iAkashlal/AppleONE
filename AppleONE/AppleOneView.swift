@@ -74,6 +74,7 @@ struct CategoryPanel: View {
     let planName: String
     let price: String
     
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -106,10 +107,10 @@ struct CategoryPanel: View {
             if (selected == index) {
                 Divider()
                 VStack(alignment: .leading) {
-                    ServiceLabel(namespace: animation, name: "applemusic", description: "70+ million songs, all ad-free")
-                    ServiceLabel(namespace: animation, name: "appletv", description: "Apple Original shows and movies")
+                    ServiceLabel(namespace: animation, name: "icloud", description: "\(selected==0 ? "50":"200") GB of iCloud storage")
                     ServiceLabel(namespace: animation, name: "applearcade", description: "Over 100 ad-free games")
-                    ServiceLabel(namespace: animation, name: "icloud", description: "50 GB of iCloud storage")
+                    ServiceLabel(namespace: animation, name: "appletv", description: "Apple Original shows and movies")
+                    ServiceLabel(namespace: animation, name: "applemusic", description: "70+ million songs, all ad-free")
                 }
             } else {
                 HStack {
