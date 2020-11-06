@@ -2,14 +2,14 @@
 //  AppleOneView.swift
 //  AppleONE
 //
-//  Created by Darío González Martínez on 01/11/2020.
+//  Edited by Akashlal Bathe on 06/11/2020.
 //
 
 import SwiftUI
 
 struct AppleOneView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State var selected = 1
+    @State var selected = 0
     
     var body: some View {
         ZStack {
@@ -39,20 +39,20 @@ struct AppleOneView: View {
                         .fontWeight(.bold)
                 }
                 .padding(.bottom, 4)
-                Text("Disfruta de millones de canciones, más de ciem juegos, programas y películas Apple Originals y mucho más. Y ahorra cuando lo unes todo en un pack.")
+                Text("Enjoy millions of songs, over a hundred games, Aple Original shows and movies, and more. And save when you bundle them together.")
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 32)
                     .padding(.bottom)
-                CategoryPanel(selected: $selected, index: 0, nombre: "Individual", precio: "14,95")
+                CategoryPanel(selected: $selected, index: 0, planName: "Individual", price: "195")
                     .padding(.bottom, 6)
-                CategoryPanel(selected: $selected, index: 1, nombre: "Familiar", precio: "19,95")
+                CategoryPanel(selected: $selected, index: 1, planName: "Familiar", price: "365")
                 Spacer()
-                Text("1 mes gratis, luego \(selected == 0 ? "14,95" : "19,95")€ al mes")
+                Text("1 month free, then ₹ \(selected == 0 ? "195" : "365")/month")
                     .font(.subheadline)
                     .foregroundColor(Color.gray)
                 Button(action: {}) {
-                    Text("Empezar prueba gratuita")
+                    Text("Start Free Trial")
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
                         .padding(.horizontal, 64)
@@ -71,13 +71,13 @@ struct CategoryPanel: View {
     @Namespace private var animation
     @Binding var selected: Int
     let index: Int
-    let nombre: String
-    let precio: String
+    let planName: String
+    let price: String
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(nombre)
+                Text(planName)
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.bottom, 4.0)
@@ -87,18 +87,18 @@ struct CategoryPanel: View {
                     .frame(width: 22, height: 22, alignment: .center)
                     .foregroundColor(selected == index ? .blue : .gray)
             }
-            Text("1 mes gratis, luego \(precio) € al mes")
+            Text("1 month free, then ₹ \(price)/month")
                 .font(.callout)
                 .padding(.bottom, 2.0)
-            Text("Tus suscripciones no son compatibles con el modo de prueba.")
+            Text("Your existing subscriptions are not eligible for trial.")
                 .fixedSize(horizontal: false, vertical: true)
                 .font(.footnote)
                 .foregroundColor(Color.gray)
-            if (index == 1) {
+            if (index == 0) {
                 HStack(alignment: .center) {
                     Image(systemName: "star.fill")
                         .foregroundColor(.blue)
-                    Text("RECOMENDADO")
+                    Text("RECOMMENDED")
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                 }.padding(.vertical, 2.0).font(.caption)
@@ -106,10 +106,10 @@ struct CategoryPanel: View {
             if (selected == index) {
                 Divider()
                 VStack(alignment: .leading) {
-                    ServiceLabel(namespace: animation, name: "applemusic", description: "Más de 70 millones de canciones sin anuncios")
-                    ServiceLabel(namespace: animation, name: "appletv", description: "Programas y películas Apple Origianls")
-                    ServiceLabel(namespace: animation, name: "applearcade", description: "Más de 100 juegos sin anuncios")
-                    ServiceLabel(namespace: animation, name: "icloud", description: "50 GB de espacio en iCloud")
+                    ServiceLabel(namespace: animation, name: "applemusic", description: "70+ million songs, all ad-free")
+                    ServiceLabel(namespace: animation, name: "appletv", description: "Apple Original shows and movies")
+                    ServiceLabel(namespace: animation, name: "applearcade", description: "Over 100 ad-free games")
+                    ServiceLabel(namespace: animation, name: "icloud", description: "50 GB of iCloud storage")
                 }
             } else {
                 HStack {
@@ -172,5 +172,6 @@ struct ServiceLabel: View {
 struct AppleOneView_Previews: PreviewProvider {
     static var previews: some View {
         AppleOneView()
+            .previewDevice("iPhone 11")
     }
 }
